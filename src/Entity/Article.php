@@ -10,12 +10,8 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Article
 {
-    /**
-     * @ORM\Id
-     * @ORM\GeneratedValue
-     * @ORM\Column(type="integer")
-     */
-    private int $id;
+    use RessourceId;
+    use Timestapable;
 
     /**
      * @ORM\Column(type="string", length=255)
@@ -33,9 +29,9 @@ class Article
      */
     private User $author;
 
-    public function getId(): ?int
+    public function __construct()
     {
-        return $this->id;
+        $this->createdAt = new \DateTimeImmutable();
     }
 
     public function getName(): ?string

@@ -15,12 +15,8 @@ use Symfony\Component\Security\Core\User\UserInterface;
  */
 class User implements UserInterface, PasswordAuthenticatedUserInterface
 {
-    /**
-     * @ORM\Id
-     * @ORM\GeneratedValue
-     * @ORM\Column(type="integer")
-     */
-    private int $id;
+    use RessourceId;
+    use Timestapable;
 
     /**
      * @ORM\Column(type="string", length=180, unique=true)
@@ -46,11 +42,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function __construct()
     {
         $this->articles = new ArrayCollection();
-    }
-
-    public function getId(): ?int
-    {
-        return $this->id;
+        $this->createdAt = new \DateTimeImmutable();
     }
 
     public function getEmail(): ?string
