@@ -66,4 +66,38 @@ class UserTest extends TestCase
         self::assertFalse($this->user->getArticles()->contains($value));
 
     }
+
+    public function testGetArticles(): void
+    {
+        $value = new Article();
+        $value1 = new Article();
+        $value2 = new Article();
+
+         $this->user->addArticle($value);
+         $this->user->addArticle($value1);
+         $this->user->addArticle($value2);
+
+
+        self::assertCount(3, $this->user->getArticles());
+        self::assertTrue($this->user->getArticles()->contains($value));
+        self::assertTrue($this->user->getArticles()->contains($value1));
+        self::assertTrue($this->user->getArticles()->contains($value2));
+
+        $response = $this->user->removeArticle($value);
+
+        self::assertInstanceOf(User::class, $response);
+        self::assertCount(2, $this->user->getArticles());
+        self::assertFalse($this->user->getArticles()->contains($value));
+        self::assertTrue($this->user->getArticles()->contains($value1));
+        self::assertTrue($this->user->getArticles()->contains($value2));
+
+        $response = $this->user->removeArticle($value1);
+
+        self::assertInstanceOf(User::class, $response);
+        self::assertCount(1, $this->user->getArticles());
+        self::assertFalse($this->user->getArticles()->contains($value));
+        self::assertFalse($this->user->getArticles()->contains($value1));
+        self::assertTrue($this->user->getArticles()->contains($value2));
+
+    }
 }

@@ -26,7 +26,7 @@ class Article
     private string $content;
 
     /**
-     * @ORM\ManyToOne(targetEntity=user::class, inversedBy="articles")
+     * @ORM\ManyToOne(targetEntity=User::class, inversedBy="articles")
      * @ORM\JoinColumn(nullable=false)
      */
     private User $author;
@@ -60,12 +60,12 @@ class Article
         return $this;
     }
 
-    public function getAuthor(): ?user
+    public function getAuthor(): ?User
     {
         return $this->author;
     }
 
-    public function setAuthor(?user $author): self
+    public function setAuthor(?User $author): self
     {
         $this->author = $author;
 
