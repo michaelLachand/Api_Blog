@@ -36,7 +36,6 @@ class UserTest extends AbstractEndPoint
 
         $responseContent = $response->getContent();
         $responseDecoded = json_decode($responseContent);
-        dd($responseDecoded);
 
         self::assertEquals(Response::HTTP_CREATED, $response->getStatusCode());
         self::assertJson($responseContent);
